@@ -71,7 +71,7 @@ public class Main {
             if (href.startsWith("//")) {
                 href = "https" + href;
             }
-            if(!href.toLowerCase().startsWith("javascript")){
+            if (!href.toLowerCase().startsWith("javascript")) {
                 updateDatabase(connection, href, "insert into LINKS_TO_BE_PROCESSED (LINK) values (?)");
             }
         }
@@ -106,10 +106,10 @@ public class Main {
             for (Element articleTag : articleTags) {
                 String title = articleTags.get(0).child(0).text();
                 String content = articleTag.select("p").stream().map(Element::text).collect(Collectors.joining("\n"));
-                try(PreparedStatement statement = connection.prepareStatement("insert into news(URL, TITLE, CONTENT,CREATED_AT,MODIFIED_AT)values (?,?,?,now(),now())")){
-                    statement.setString(1,link);
-                    statement.setString(2,title);
-                    statement.setString(3,content);
+                try (PreparedStatement statement = connection.prepareStatement("insert into news(URL, TITLE, CONTENT,CREATED_AT,MODIFIED_AT)values (?,?,?,now(),now())")) {
+                    statement.setString(1, link);
+                    statement.setString(2, title);
+                    statement.setString(3, content);
                     statement.executeUpdate();
                 }
             }

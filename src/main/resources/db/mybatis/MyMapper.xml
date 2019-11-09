@@ -8,13 +8,13 @@
         from LINKS_TO_BE_PROCESSED
         LIMIT 1
     </select>
-    <delete id="deleteLink" parameterType="=String">
-        delete
-        from LINKS_TO_BE_PROCESSED
+    <delete id="deleteLink" parameterType="String">
+        DELETE
+        FROM LINKS_TO_BE_PROCESSED
         where link = #{link}
     </delete>
     <insert id="insertNews" parameterType="com.github.hcsp.News">
-        insert into news(URL, TITLE, CONTENT, CREATED_AT, MODIFIED_AT)
+        insert into NEWS (url, title, content, created_at, MODIFIED_AT)
         values (#{url}, #{title}, #{content}, now(), now())
     </insert>
     <select id="countLink" resultType="int">

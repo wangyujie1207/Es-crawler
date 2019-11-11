@@ -14,8 +14,8 @@
         where link = #{link}
     </delete>
     <insert id="insertNews" parameterType="com.github.hcsp.News">
-        insert into NEWS (url, title, content, created_at, MODIFIED_AT)
-        values (#{url}, #{title}, #{content}, now(), now())
+        insert into NEWS (title, url, content, created_at, MODIFIED_AT)
+        values (#{title}, #{url}, #{content}, now(), now())
     </insert>
     <select id="countLink" resultType="int">
         select count(LINK)
@@ -25,14 +25,14 @@
     <insert id="insertLink" parameterType="HashMap">
         insert into
         <choose>
-            <when test="tableName == 'links_already_processed'">
-                links_already_processed
+            <when test="tableName == 'LINKS_ALREADY_PROCESSED'">
+                LINKS_ALREADY_PROCESSED
             </when>
             <otherwise>
-                links_to_be_processed
+                LINKS_TO_BE_PROCESSED
             </otherwise>
         </choose>
         (link)
-        values #{link}
+        values (#{link})
     </insert>
 </mapper>

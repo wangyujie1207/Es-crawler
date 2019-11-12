@@ -16,9 +16,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class Crawler {
-    private CrawlerDao dao = new MyBatisCrawlerDao();
+public class Crawler extends Thread{
+    private CrawlerDao dao;
 
+    public Crawler(CrawlerDao dao) {
+        this.dao = dao;
+    }
+
+    @Override
     public void run() {
         try {
             String link;
@@ -40,11 +45,6 @@ public class Crawler {
             throw new RuntimeException(e);
         }
 
-    }
-
-    @SuppressFBWarnings("DMI_CONSTANT_DB_PASSWORD")
-    public static void main(String[] args) {
-        new Crawler().run();
     }
 
     private void parseUrlsFromPageAndStoreIntoDatabase(Document doc) throws SQLException {

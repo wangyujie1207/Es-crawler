@@ -18,7 +18,7 @@
 *.njsproj
 *.sln
 
-mysql-data
+mysql-data/
 
 # Package Files #
 *.jar
